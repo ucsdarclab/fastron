@@ -1,0 +1,25 @@
+<launch>
+  <!-- load URDF -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find baxter_description)/urdf/baxter.urdf.xacro'" />
+
+  <!-- load SRDF -->
+  <param name="robot_description_semantic" command="$(find xacro)/xacro --inorder '$(find baxter_moveit_config)/config/baxter.srdf.xacro'" />
+
+  <!-- launch rviz -->
+  <node name="$(anon rviz)" pkg="rviz" type="rviz" respawn="false" output="screen" args="-d $(find fastron)/launch/fastron_baxter.rviz">
+    <rosparam command="load" file="$(find baxter_moveit_config)/config/kinematics.yaml"/>
+  </node>
+  
+  <!-- If needed, broadcast static tf for robot root -->
+  <node pkg="tf" type="static_transform_publisher" name="virtual_joint_broadcaster_0" args="0 0 0 0 0 1 /world/base /base /right_gripper_base 10" />
+
+<!-- Arguments: g, r, sigma, useGJKforFastron, numTrials, DOF, A -->
+  <node name="fastronColCheckTests" pkg="fastron" type="fastronColCheckTests7D" respawn="false" output="screen" args="10 100 0.1 1 30 4 0.05">
+  <!-- <node name="fastronMotionPlanningTests" pkg="fastron" type="fastronMotionPlanningTests" respawn="false" output="screen" args="5 500 0.3 0 50 6 0.05"> -->
+<!-- <node name="fastronMotionPlanningTests" pkg="fastron" type="fastronMotionPlanningTests" respawn="false" output="screen" args="5 500 0.3 0 50 7 0.05"> -->
+    <rosparam command="load" file="$(find baxter_moveit_config)/config/kinematics.yaml"/>
+  </node>
+
+  <!-- <arg name="publish_monitored_planning_scene" default="true"/> -->
+  <node name="move_group" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="screen" />
+</launch>

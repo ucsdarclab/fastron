@@ -1,0 +1,28 @@
+<launch>
+  <!-- load URDF -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find baxter_description)/urdf/baxter.urdf.xacro'" />
+
+  <!-- load SRDF -->
+  <param name="robot_description_semantic" command="$(find xacro)/xacro --inorder '$(find baxter_moveit_config)/config/baxter.srdf.xacro'" />
+
+  <!-- launch rviz -->
+  <node name="$(anon rviz)" pkg="rviz" type="rviz" respawn="false" output="screen" args="-d $(find fastron)/launch/fastron_baxter.rviz">
+    <rosparam command="load" file="$(find baxter_moveit_config)/config/kinematics.yaml"/>
+  </node>
+  
+  <!-- If needed, broadcast static tf for robot root -->
+  <node pkg="tf" type="static_transform_publisher" name="virtual_joint_broadcaster_0" args="0 0 0 0 0 1 /world/base_footprint /base_footprint 10" />
+
+  <!-- launch interactivity_tutorial -->
+  <node name="fastron" pkg="fastron" type="fastron" respawn="false" output="screen">
+    <rosparam command="load" file="$(find baxter_moveit_config)/config/kinematics.yaml"/>
+  </node>
+
+  <!-- <arg name="publish_monitored_planning_scene" default="true"/> -->
+  <node name="move_group" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="screen">
+        <!-- <param name="planning_scene_monitor/publish_planning_scene" value="$(arg publish_monitored_planning_scene)" />
+        <param name="planning_scene_monitor/publish_geometry_updates" value="$(arg publish_monitored_planning_scene)" />
+        <param name="planning_scene_monitor/publish_state_updates" value="$(arg publish_monitored_planning_scene)" />
+        <param name="planning_scene_monitor/publish_transforms_updates" value="$(arg publish_monitored_planning_scene)" /> -->
+  </node>
+</launch>
