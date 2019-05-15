@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_ros_planning
   moveit_ros_planning_interface
   moveit_visual_tools
+  interactive_markers
 )
 find_package(Eigen3 REQUIRED)
 find_package(OMPL)
