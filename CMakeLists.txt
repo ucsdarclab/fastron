@@ -31,7 +31,6 @@ catkin_package(
 include_directories(SYSTEM ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIRS})
 include_directories(${catkin_INCLUDE_DIRS})
 include_directories(include)
-#include_directories(/usr/include/fcl/narrowphase/)
 
 link_directories(${catkin_LIBRARY_DIRS})
 
