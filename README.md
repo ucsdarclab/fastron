@@ -66,11 +66,11 @@ fastron.updateModel();
 fastron.eval(data_test);  // data_test is an Eigen::MatrixXd where each row is a query configuration
 ```
 
-# Requirements
+## Requirements
 * Eigen
 * ROS Kinetic
 * MoveIt
 * OMPL
 
-# Credit
+## Credit
 * Nikhil Das - [nkhldas](https://github.com/nkhldas)
