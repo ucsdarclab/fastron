@@ -11,7 +11,7 @@ A C++ implementation of Fastron based on the paper [Learning-Based Proxy Collisi
     }
 
 ## Installation
-The contents of this repository can be placed in a directory to be used as a ROS package. For example, if `catkin_ws` is the ROS workspace, clone the repository into a subdirectory called `fastron`, and call `catkin_make` from `catkin_ws`. 
+The contents of this repository can be placed in a directory to be used as a ROS package. For example, if `catkin_ws` is the ROS workspace, clone the repository into a subdirectory called `src/fastron`, and call `catkin_make` from `catkin_ws`. 
 
 ROS launch files can be run as examples, e.g.,
 ```bash
