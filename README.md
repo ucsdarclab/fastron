@@ -44,10 +44,10 @@ The `eval()` method predicts the collision status label for a set of query confi
 ### Example
 Assume that `FastronKCD` is a derived class from `Fastron` with a custom KCD routine.
 ```cpp
-# Instantiate model
+// Instantiate model
 FastronKCD fastron(data); // data is an Eigen::MatrixXd where each row is a configuration
 
-# Define model parameters
+// Define model parameters
 fastron.g = 10; // kernel parameter
 fastron.beta = 100; // conditional bias parameter
 fastron.maxSupportPoints = 3000; // support point cap
@@ -56,13 +56,13 @@ fastron.kNS = 2 * d; // number of points per support point for exploitation in a
 fastron.sigma = 0.1; // standard deviation of Gaussians for exploitation sampling
 fastron.allowance = 100; // size of active learning set
 
-# Update the labels of the model
+// Update the labels of the model
 fastron.updateLabels();
 
-# Update the model weights
+// Update the model weights
 fastron.updateModel();
 
-# Predict values for a test set
+// Predict values for a test set
 fastron.eval(data_test);  // data_test is an Eigen::MatrixXd where each row is a query configuration
 ```
 
